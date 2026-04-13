@@ -61,7 +61,8 @@ Dự án tổ chức mã nguồn rõ ràng để phân tách trách nhiệm (Sep
 ## 🧑‍💻 Nguyên tắc Lập Trình Đặc Trưng
 1.  **Đóng gói (Encapsulation):** Toàn bộ Field của Entities (Mã, Tên, Giá, SL) được ẩn (`private`), mọi truy cập ngoài được vận hành thông qua các phương thức Get/Set.
 2.  **Kế thừa (Inheritance):** Các lớp tác nhân cụ thể như `Employee` và `Customer` vận dụng thiết kế giảm trùng lặp bằng cách kế thừa thẳng từ lớp `Person`.
-3.  **Clean Code & Chuẩn hóa:** Module hoá triệt để, có các thư viện Utils riêng cho Thao tác chuỗi, File và Date-Time.
+3.  **Đa hình & Trừu tượng (Polymorphism & Abstraction):** Áp dụng triệt để Dependency Inversion và Interface-based design. Sử dụng đa hình qua các hàm `virtual` cho phép khả năng mở rộng (Scalability) của dự án sau này. 
+4.  **Clean Code & Chuẩn hóa:** Module hoá triệt để, phân quyền theo MVC rõ rệt, có các thư viện Utils độc lập dùng chung cho Thao tác chuỗi, File I/O và Date-Time.
 
 ---
 
