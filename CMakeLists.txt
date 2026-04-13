@@ -38,4 +38,6 @@ add_executable(duanqlsieuthi ${SOURCES}
         include/models/entities/Customer.h
         src/models/entities/Customer.cpp
         include/models/logic/CustomerModel.h
-        src/models/logic/CustomerModel.cpp)
+        src/models/logic/CustomerModel.cpp
+        include/utils/StringUtils.h
+        src/utils/StringUtils.cpp)
