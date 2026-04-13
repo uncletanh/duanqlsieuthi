@@ -12,7 +12,7 @@ void EmployeeController::run(Employee* currentUser) {
     int choice;
     do {
         view.displayPersonnelMenu(); // Hiện Menu quản lý nhân viên
-        choice = InputUtils::getValidInt("", 0, 5);
+        choice = InputUtils::getValidInt("Lựa chọn của bạn: ", 0, 6);
 
         switch (choice) {
             case 1: // Xem danh sách
@@ -121,6 +121,25 @@ void EmployeeController::run(Employee* currentUser) {
                     model.updateWorkingHours(id, hours);
                     view.displayMessage("Cham cong thanh cong! Da cong them " + std::to_string(hours) + " gio.");
                 }
+                break;
+            }
+
+            case 6: { // Mở khóa tài khoản
+                std::string id = InputUtils::getValidString("Nhập mã NV cần mở khóa: ");
+                if (id == "CANCEL") break;
+
+                bool found = false;
+                for (const auto& emp : model.getAllEmployees()) {
+                    if (emp.getId() == id) { found = true; break; }
+                }
+
+                if (!found) {
+                    view.displayMessage("\t[LỖI] Không tìm thấy nhân viên mã " + id);
+                    break;
+                }
+
+                model.unlockEmployee(id);
+                view.displayMessage("Đã mở khóa tài khoản nhân viên " + id);
                 break;
             }
 

@@ -12,7 +12,8 @@
 #include "controllers/EmployeeController.h"
 
 int main() {
-    // Kích hoạt Console đọc UTF-8 Tiếng Việt
+    // Kích hoạt Console đọc/ghi UTF-8 Tiếng Việt
+    SetConsoleCP(CP_UTF8);
     SetConsoleOutputCP(CP_UTF8);
 
     // 1. Khởi tạo các thành phần hệ thống
@@ -35,17 +36,19 @@ int main() {
 
     // 2. Vòng lặp đăng nhập
     while (currentUser == nullptr) {
-        std::cout << "\n[ DANG NHAP HE THONG ]\n";
-        std::cout << "Ma nhan vien: "; std::cin >> user_id;
-        std::cout << "Mat khau: ";     std::cin >> password;
+        std::cout << "\n[ ĐĂNG NHẬP HỆ THỐNG ]\n";
+        std::cout << "Mã nhân viên: "; std::cin >> user_id;
+        std::cout << "Mật khẩu: ";     std::cin >> password;
 
-        currentUser = authModel.login(user_id, password);
+        int status = authModel.login(user_id, password, currentUser);
 
-        if (currentUser != nullptr) {
-            std::cout << "\n=> Dang nhap thanh cong! Chao mung "
+        if (status == 1) {
+            std::cout << "\n=> Đăng nhập thành công! Chào mừng "
                       << currentUser->getName() << " (" << currentUser->getRole() << ")\n";
+        } else if (status == 2) {
+            std::cout << "\n=> [LỖI] Tài khoản này đã bị khóa bởi Quản lý!\n";
         } else {
-            std::cout << "\n=> [LOI] Sai tai khoan hoac mat khau. Vui long thu lai!\n";
+            std::cout << "\n=> [LỖI] Sai tài khoản hoặc mật khẩu. Vui lòng thử lại!\n";
         }
     }
 

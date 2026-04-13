@@ -1,4 +1,5 @@
 #include "utils/InputUtils.h"
+#include "utils/StringUtils.h"
 #include <iostream>
 #include <limits>
 #include <algorithm>
@@ -93,7 +94,7 @@ std::string InputUtils::getValidString(std::string prompt) {
 bool containsInvalidChars(const std::string& str) {
     // Tiếng Việt UTF-8 khá phức tạp nên mình chỉ chặn các dấu nguy hiểm và các con số.
     for (char c : str) {
-        if (isdigit(c)) return true; // Cấm số 0-9
+        if (isdigit((unsigned char)c)) return true; // Cấm số 0-9
         if (c == '!' || c == '@' || c == '#' || c == '$' || c == '%' ||
             c == '^' || c == '&' || c == '*' || c == '(' || c == ')' ||
             c == '+' || c == '=' || c == '<' || c == '>' || c == '?' ||
@@ -115,7 +116,7 @@ std::string InputUtils::getValidName(std::string prompt) {
             std::cout << "\t[Lỗi] Tên không được chứa Chữ số (0-9) hay Ký tự đặc biệt! Vui lòng nhập lại.\n";
             continue;
         }
-        return value;
+        return StringUtils::toTitleCase(value);
     }
 }
 
@@ -128,7 +129,7 @@ std::string InputUtils::getValidPhone(std::string prompt) {
         // Check if all characters are digits
         bool isAllDigits = true;
         for (char c : value) {
-            if (!isdigit(c)) {
+            if (!isdigit((unsigned char)c)) {
                 isAllDigits = false; break;
             }
         }
